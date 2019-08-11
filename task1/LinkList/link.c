@@ -7,7 +7,7 @@
 bool Link_Create(LinkList * li)
 {
 	li->len = 0;
-	li->head = li->rear = (LinkNode *)malloc(sizeof(LinkNode) );
+	li->head = li->rear = (LinkNode *)malloc(sizeof(LinkNode) );//dummy头节点
 	if(li->head == NULL)
 	{
 		printf("Create LinkList Failed!");
@@ -71,5 +71,38 @@ bool Link_Delete(LinkList * li, int i)
 	li->len--;
 	printf("Delete node in position %d",i );
 	return true;
+
+}
+
+//单恋表反转,原地反转法
+bool Link_Reverse(LinkList * li)
+{
+	if(li->len < 2)
+	{
+		printf("no need to reverse!");
+		return true;
+	}
+	else
+	{
+		LinkNode * f;
+		LinkNode * sec;//用于将指针状态向下一个循环状态转移的中间变量
+		LinkNode * pri;
+		
+		pri = li->head->next;//pri = node1
+		li->head->next = li->rear;//dummy指向尾节点；
+		li->rear = li->head->next;//尾指针指向第一个节点
+		f = pri->next;   //f =node2
+		pri->next = NULL; //第一次反转
+		//进入子问题,参数：pri指向已反转的节点，f指向本次要反转的节点，sec临时变量指向下一个子问题的f
+		while(NULL != f )
+		{
+			sec = f->next;
+			f->next = pri;
+			//指针转移到下一次循环的状态
+			pri = f;
+			f = sec;
+		}
+		return true;
+	}
 
 }

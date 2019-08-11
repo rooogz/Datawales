@@ -17,7 +17,7 @@ typedef struct
 }DuLinkNode;
 
 
-
+//带dummy头节点，头指针指向dummy
 typedef struct 
 {
 	int len;
@@ -29,7 +29,6 @@ typedef struct
 typedef struct 
 {
 	int len;
-	LinkNode * head;
 	LinkNode * rear;
 }ScLinkList;
 
